@@ -16,4 +16,7 @@ body,input ,button  {
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
 }
+button, a  {
+  cursor: pointer;
+}
 `

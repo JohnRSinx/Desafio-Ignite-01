@@ -21,6 +21,9 @@ export function Main() {
           </p>
         </TitleCards>
         <Card />
+        <Card />
+        <Card />
+        <Card />
       </CardsContainer>
     </Container>
   )
