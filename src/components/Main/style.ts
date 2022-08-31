@@ -3,17 +3,17 @@ import styled from 'styled-components'
 export const Container = styled.main`
   max-width: 46rem;
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
   flex-direction: column;
   margin-top: -1.6rem;
 `
+
 export const FormTask = styled.form`
   display: flex;
   gap: 0.5rem;
   justify-content: center;
 
   input {
+    color: ${({ theme }) => theme['gray-100']};
     width: 39.875rem;
     height: 3.375rem;
     line-height: 1.6rem;
@@ -34,7 +34,6 @@ export const FormTask = styled.form`
     color: ${({ theme }) => theme['gray-100']};
     gap: 0.5rem;
     font-weight: bold;
-    border: none;
     transition: background-color 0.1s;
 
     :hover {
