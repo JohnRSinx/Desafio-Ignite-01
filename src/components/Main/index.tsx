@@ -9,20 +9,17 @@ export interface TasksProps {
   title: string
   isCompleted: boolean
 }
+
 export function Main() {
   const [tasks, setTasks] = useState<TasksProps[]>([])
   const [textTask, setTextTaks] = useState('')
-  const [completedTask, setCompletedTasks] = useState(null)
-
-  const filteredConcludedsTasks = tasks.filter(
-    (task) => task.isCompleted === true,
-  )
+  const [completedTask, setCompletedTasks] = useState(false)
 
   function handleCreateNewTask(event: FormEvent<HTMLFormElement>) {
     const newTask = {
       id: uuidv4(),
       title: textTask,
-      isCompleted: false,
+      isCompleted,
     }
     event.preventDefault()
     setTasks((state) => [...state, newTask])
@@ -33,13 +30,23 @@ export function Main() {
     })
     setTasks(taskWithoutDeleteOn)
   }
+  const isCompleted = completedTask
+
+  const filteredConcludedsTasks = tasks.filter(
+    (task) => task.isCompleted === true,
+  )
+  function handleCompletedTask() {
+    completedTask ? setCompletedTasks(false) : setCompletedTasks(true)
+  }
+
   function onCompletedTask(taskCompleted: TasksProps) {
+    handleCompletedTask()
     setTasks(
       tasks.map((task) => {
         if (task.id === taskCompleted.id) {
           return {
             ...task,
-            isCompleted: true,
+            isCompleted,
           }
         } else {
           return task
@@ -47,6 +54,7 @@ export function Main() {
       }),
     )
   }
+
   return (
     <Container>
       <FormTask onSubmit={handleCreateNewTask}>
