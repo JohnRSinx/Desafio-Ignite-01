@@ -25,6 +25,7 @@ export const CheckBox = styled.button`
   background: none;
   overflow: hidden;
   border-radius: 4px;
+  outline: none;
   box-shadow: none;
   color: ${({ theme }) => theme['blue-dark']};
   :hover {

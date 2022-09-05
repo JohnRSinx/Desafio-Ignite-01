@@ -15,15 +15,21 @@ export function Main() {
   const [textTask, setTextTaks] = useState('')
   const [completedTask, setCompletedTasks] = useState(false)
 
+  function handleCompletedTask() {
+    completedTask ? setCompletedTasks(false) : setCompletedTasks(true)
+  }
+
   function handleCreateNewTask(event: FormEvent<HTMLFormElement>) {
     const newTask = {
       id: uuidv4(),
       title: textTask,
-      isCompleted,
+      isCompleted: false,
     }
+    setTextTaks('')
     event.preventDefault()
     setTasks((state) => [...state, newTask])
   }
+
   function onDeleteTask(taskDelete: TasksProps) {
     const taskWithoutDeleteOn = tasks.filter((task) => {
       return task !== taskDelete
@@ -35,15 +41,12 @@ export function Main() {
   const filteredConcludedsTasks = tasks.filter(
     (task) => task.isCompleted === true,
   )
-  function handleCompletedTask() {
-    completedTask ? setCompletedTasks(false) : setCompletedTasks(true)
-  }
 
   function onCompletedTask(taskCompleted: TasksProps) {
-    handleCompletedTask()
     setTasks(
       tasks.map((task) => {
         if (task.id === taskCompleted.id) {
+          handleCompletedTask()
           return {
             ...task,
             isCompleted,
@@ -54,7 +57,7 @@ export function Main() {
       }),
     )
   }
-
+  const isNewTaskEmpety = textTask.length === 0
   return (
     <Container>
       <FormTask onSubmit={handleCreateNewTask}>
@@ -62,8 +65,9 @@ export function Main() {
           type="text"
           placeholder="Adicione uma nova tarefa"
           onChange={(e) => setTextTaks(e.target.value)}
+          value={textTask}
         />
-        <button>
+        <button disabled={isNewTaskEmpety}>
           Criar <PlusCircle size="16" weight="bold" />
         </button>
       </FormTask>

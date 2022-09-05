@@ -40,6 +40,12 @@ export const FormTask = styled.form`
       background: ${({ theme }) => theme.blue};
     }
   }
+  button:disabled {
+    opacity: 0.7;
+    background: ${({ theme }) => theme['blue-dark']};
+    border: none;
+    cursor: not-allowed;
+  }
 `
 export const CardsContainer = styled.div`
   margin-top: 4rem;
